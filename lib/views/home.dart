@@ -9,19 +9,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            Text("Full Name :  \n Username : "),
-            FlatButton(
-              child: Text("SignOut"),
-              onPressed: () {
-                
-              },
-            )
-          ],
-        ),
+        child: Text("Home"),
       ),
     );
   }

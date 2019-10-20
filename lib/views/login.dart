@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rez_apps/api/server.dart';
+import 'package:rez_apps/views/bottombar.dart';
 import 'package:rez_apps/views/profile.dart';
 import 'package:rez_apps/views/register.dart';
 import 'package:http/http.dart' as http;
@@ -211,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
         );
         break;
       case LoginStatus.signIn:
-        return Profile();
+        return BottomBarz();
         break;
     }
   }

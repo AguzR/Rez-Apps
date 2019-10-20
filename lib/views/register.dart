@@ -15,29 +15,18 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: ListView(
         children: <Widget>[
-          ClipPath(
-            clipper: Clipper(),
-            child: Container(
-              width: double.infinity,
-              height: 300,
-              decoration: BoxDecoration(color: Colors.purple),
+          Container(
+            width: double.infinity,
+            height: 300.0,
+            decoration: BoxDecoration(color: Colors.purple),
+            child: Icon(
+              Icons.fiber_smart_record,
+              size: 90.0,
+              color: Colors.white,
             ),
-          )
+          ),
         ],
       ),
     );
   }
-}
-
-class Clipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    return null;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return null;
-  }
-
 }

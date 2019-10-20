@@ -1,4 +1,4 @@
 class BaseUrl {
-  static String login = "";
+  static String login = "http://192.168.43.69/rez_apps/authentication/login.php";
   static String register = "";
 }

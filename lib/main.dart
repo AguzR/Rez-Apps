@@ -6,5 +6,7 @@ void main() {
     debugShowCheckedModeBanner: false,
     title: "Rez Official",
     home: SplashScreen(),
+    theme: ThemeData(
+    ),
   ));
 }

@@ -48,13 +48,14 @@ class _LoginPageState extends State<LoginPage> {
     final data = jsonDecode(response.body);
     int value = data['value'];
     String message = data['message'];
+    String id = data['id'];
     String usernameApi = data['username'];
     String nameApi = data['name'];
 
     if (value == 1) {
       setState(() {
         _loginStatus = LoginStatus.signIn;
-        savePref(value, usernameApi, nameApi);
+        savePref(value, id, usernameApi, nameApi);
       });
       Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT);
     } else {
@@ -62,10 +63,11 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  savePref(int value, String username, String name) async {
+  savePref(int value, String id, String username, String name) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setInt("value", value);
+      preferences.setString("id", id);
       preferences.setString("username", username);
       preferences.setString("name", name);
       preferences.commit();

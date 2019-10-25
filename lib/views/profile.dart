@@ -7,7 +7,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String name = ""; 
+  String name = "";
   String username = "";
 
   getPref() async {
@@ -25,13 +25,36 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Text("Full Name : $name \n Username : $username"),
-          ],
+        body: ListView(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(top: 60.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 150.0,
+                height: 150.0,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('images/back.jpg'))),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+              ),
+              Text(
+                "$name",
+                style: TextStyle(fontSize: 18.0, color: Colors.purple),
+              ),
+              Text(
+                "$username",
+                style: TextStyle(fontSize: 14.0, color: Colors.purple),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      ],
+    ));
   }
 }

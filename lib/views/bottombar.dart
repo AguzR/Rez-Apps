@@ -25,12 +25,22 @@ class _BottomBarzState extends State<BottomBarz> with TickerProviderStateMixin {
     });
   }
 
+  String name = "";
+  String username = "";
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    username = preferences.getString("username");
+    name = preferences.getString("name");
+  }
+
   @override
   void initState() {
     tabController = new TabController(vsync: this, length: 3);
     super.initState();
+    getPref();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     switch (_loginStatus) {

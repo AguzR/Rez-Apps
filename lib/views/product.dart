@@ -7,6 +7,7 @@ import 'package:rez_apps/model/productModel.dart';
 import 'package:rez_apps/views/addProduct.dart';
 import 'package:http/http.dart' as http;
 import 'package:rez_apps/views/editProduct.dart';
+import 'package:intl/intl.dart';
 
 class Product extends StatefulWidget {
   @override
@@ -14,6 +15,9 @@ class Product extends StatefulWidget {
 }
 
 class _ProductState extends State<Product> {
+  // membuat currency untuk menampilkan harga cth 15,000 ada komanya
+  final _money = NumberFormat("#,##0","en_US");
+
   // membuat list dengan identifier ke productmodel
   final list = new List<ProductModel>();
 
@@ -154,7 +158,7 @@ class _ProductState extends State<Product> {
                                         fontFamily: "Quicksand",
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.bold)),
-                                Text(x.harga,
+                                Text(_money.format(int.parse(x.harga)),
                                     style: TextStyle(fontFamily: "Quicksand")),
                                 Text(x.qty,
                                     style: TextStyle(fontFamily: "Quicksand")),

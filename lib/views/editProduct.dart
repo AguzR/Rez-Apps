@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rez_apps/api/server.dart';
+import 'package:rez_apps/custom/currency.dart';
 import 'package:rez_apps/model/productModel.dart';
 import 'package:http/http.dart' as http;
 
@@ -40,7 +42,7 @@ class _EditProductState extends State<EditProduct> {
     final response = await http.post(BaseUrl.updateproduct, body: {
       "namaProduct": namaProduct,
       "qty": qty,
-      "harga": harga,
+      "harga": harga.replaceAll(",", ""),
       "idProduct": widget.model.id
     });
     final data = jsonDecode(response.body);
@@ -82,6 +84,7 @@ class _EditProductState extends State<EditProduct> {
                   if (e.isEmpty) {
                     return "Please insert name product";
                   }
+                  return null;
                 },
                 onSaved: (e) => namaProduct = e,
                 decoration: InputDecoration(
@@ -93,6 +96,7 @@ class _EditProductState extends State<EditProduct> {
                   if (e.isEmpty) {
                     return "Please insert quantity product";
                   }
+                  return null;
                 },
                 onSaved: (e) => qty = e,
                 decoration: InputDecoration(
@@ -104,14 +108,18 @@ class _EditProductState extends State<EditProduct> {
                   if (e.isEmpty) {
                     return "Please insert price product";
                   }
+                  return null;
                 },
+                inputFormatters: [
+                  WhitelistingTextInputFormatter.digitsOnly, CurrencyFormat()
+                ],
                 onSaved: (e) => harga = e,
                 decoration: InputDecoration(
                     labelText: "Harga Product", hintText: "Harga Product"),
               ),
               Padding(padding: EdgeInsets.only(top: 20.0)),
               MaterialButton(
-                color: Colors.blue,
+                color: Colors.purple,
                 onPressed: () {
                   _checkForm();
                 },

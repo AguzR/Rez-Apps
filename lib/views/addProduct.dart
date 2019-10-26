@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:rez_apps/api/server.dart';
+import 'package:rez_apps/custom/currency.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddProduct extends StatefulWidget {
@@ -37,7 +39,7 @@ class _AddProductState extends State<AddProduct> {
     final response = await http.post(BaseUrl.addproduct, body: {
       "namaProduct" : namaProduct,
       "qty" : qty,
-      "harga" : harga,
+      "harga" : harga.replaceAll(",", ""),
       "idUsers" : idUsers
     });
     final data = jsonDecode(response.body);
@@ -45,10 +47,10 @@ class _AddProductState extends State<AddProduct> {
     String message = data['message'];
 
     if (value == 1) {
-      // Fluttertoast.showToast(
-      //   msg: message,
-      //   toastLength: Toast.LENGTH_SHORT
-      // );
+      Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT
+      );
       widget.reload();
       Navigator.pop(context);
     } else {
@@ -83,6 +85,7 @@ class _AddProductState extends State<AddProduct> {
                 if (e.isEmpty) {
                   return "Please insert name product";
                 }
+                return null;
               },
               onSaved: (e)=> namaProduct = e,
               decoration: InputDecoration(
@@ -94,6 +97,7 @@ class _AddProductState extends State<AddProduct> {
                 if (e.isEmpty) {
                   return "Please insert Quantity";
                 }
+                return null;
               },
               onSaved: (e)=> qty = e,
               decoration: InputDecoration(
@@ -104,12 +108,17 @@ class _AddProductState extends State<AddProduct> {
               validator: (e) {
                 if (e.isEmpty) {
                   return "Please insert Price";
-                }
+                } 
+                return null;
               },
+              inputFormatters: [
+                WhitelistingTextInputFormatter.digitsOnly, CurrencyFormat()
+              ],
               onSaved: (e)=> harga = e,
               decoration: InputDecoration(
                   labelText: "Price", hintText: "Price"),
             ),
+            Padding(padding: EdgeInsets.only(top: 20.0)),
             MaterialButton(
               onPressed: (){
                 checkForm();

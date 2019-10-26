@@ -15,12 +15,20 @@ class _RegisterPageState extends State<RegisterPage> {
   String name, username, password;
   final _key = new GlobalKey<FormState>();
   bool _secureText = true;
+  var _autovalidate = false;
+
+  // // belum bisa
+  // RegExp _regExp = RegExp(r"[a-zA-Z ]");
 
   check() {
     var form = _key.currentState;
     if (form.validate()) {
       form.save();
       register();
+    } else {
+      setState(() {
+       _autovalidate = true; 
+      });
     }
   }
 
@@ -64,6 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
         elevation: 0,
       ),
       body: Form(
+        autovalidate: _autovalidate,
         key: _key,
         child: ListView(
           children: <Widget>[
@@ -88,6 +97,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (e) {
                       if (e.isEmpty) {
                         return "Please insert your full name";
+                      } else {
+                        return null;
                       }
                     },
                     onSaved: (e) => name = e,
@@ -102,6 +113,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (e) {
                       if (e.isEmpty) {
                         return "Please insert your username";
+                      } else if (!e.contains("@")) {
+                        return "Wrong format email for username";
+                      } else {
+                        return null;
                       }
                     },
                     onSaved: (e) => username = e,
@@ -116,6 +131,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (e) {
                       if (e.isEmpty) {
                         return "Please insert your passsword";
+                      } else if (e.length < 8) {
+                        return "Password must be at least 8 characters long";
+                      } else {
+                        return null;
                       }
                     },
                     obscureText: _secureText,

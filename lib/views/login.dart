@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final _key = new GlobalKey<FormState>();
   LoginStatus _loginStatus = LoginStatus.notSignIn;
   var value;
+  var _autovalidate = false;
 
   // membuat show hide password
   bool _secureText = true;
@@ -38,6 +39,10 @@ class _LoginPageState extends State<LoginPage> {
     if (form.validate()) {
       form.save();
       login();
+    } else {
+      setState(() {
+        _autovalidate = true;
+      });
     }
   }
 
@@ -99,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
             elevation: 0,
           ),
           body: Form(
+            autovalidate: _autovalidate,
             key: _key,
             child: ListView(
               children: <Widget>[
@@ -123,6 +129,10 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (e) {
                           if (e.isEmpty) {
                             return "Please insert your username";
+                          } else if (!e.contains("@")) {
+                            return "Wrong format email for username";
+                          } else {
+                            return null;
                           }
                         },
                         onSaved: (e) => username = e,
@@ -142,6 +152,8 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (e) {
                           if (e.isEmpty) {
                             return "Please insert your password";
+                          } else {
+                            return null;
                           }
                         },
                         obscureText: _secureText,

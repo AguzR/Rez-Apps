@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rez_apps/api/server.dart';
 import 'package:rez_apps/model/productModel.dart';
 import 'package:rez_apps/views/addProduct.dart';
@@ -59,6 +60,55 @@ class _ProductState extends State<Product> {
       setState(() {
         loading = false;
       });
+    }
+  }
+
+  dialogDel(String id) {
+    AlertDialog alertDialog = new AlertDialog(
+      content: Text("Are you sure want to delete this product ?"),
+      actions: <Widget>[
+        FlatButton(
+          color: Colors.blue,
+          child: Text("No", style: TextStyle(color: Colors.white)),
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+        FlatButton(
+          color: Colors.red,
+          child: Text("Yes", style: TextStyle(color: Colors.white)),
+          onPressed: (){
+            _delete(id);
+          },
+        )
+      ],
+    );
+
+    showDialog(context: context, child: alertDialog);
+
+  }
+
+  _delete(String id) async {
+    final response = await http.post(BaseUrl.deleteproduct, body: {
+      "idProduct" : id
+    });
+    final data = jsonDecode(response.body);
+    int value = data['value'];
+    String message = data['message'];
+    if (value == 1) {
+      setState(() {
+        Fluttertoast.showToast(
+          msg: message,
+          toastLength: Toast.LENGTH_SHORT
+        );
+        Navigator.pop(context);
+        _readProduct();
+      });
+    } else {
+      Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT
+      );
     }
   }
 
@@ -128,7 +178,9 @@ class _ProductState extends State<Product> {
                               ),
                               IconButton(
                                 color: Colors.red,
-                                onPressed: () {},
+                                onPressed: () {
+                                  dialogDel(x.id);
+                                },
                                 icon: Icon(Icons.delete),
                               )
                             ],

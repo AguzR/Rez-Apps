@@ -1,6 +1,9 @@
 # rez_apps
 
-A new Flutter project.
+- Login and Register with SharedPrefences.
+- CRUD with JSON
+- FlutterToast
+- RefreshIndicator
 
 ## Getting Started
 

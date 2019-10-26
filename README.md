@@ -7,7 +7,7 @@
 - AlertDialog
 
 # Results
-![login](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasillogin.PNG), ![regist](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilregist.PNG)
+![login](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasillogin.PNG), ![regist](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilregist.PNG), ![create](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilcreate.PNG), ![read](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilread.PNG), ![update](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilupdate.PNG), ![delete](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasildelete.PNG)
 
 ## Getting Started
 

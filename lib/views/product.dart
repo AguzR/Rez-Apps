@@ -18,8 +18,12 @@ class _ProductState extends State<Product> {
   // membuat var loading untuk menghandel load data
   var loading = false;
 
+  // membuat global key untuk refresh indicator
+  final GlobalKey<RefreshIndicatorState> _refresh = GlobalKey<RefreshIndicatorState>();
+
   // membuat untuk mengambil datanya
-  readProduct() async {
+  // untuk bisa refresh swipe method harus Future<void>
+  Future<void> _readProduct() async {
     // listnya harus di clear, agar ketika di restart datanya tidak menumpuk
     list.clear();
 
@@ -61,69 +65,75 @@ class _ProductState extends State<Product> {
   @override
   void initState() {
     super.initState();
-    readProduct();
+    _readProduct();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // set loading true or false
-      body: loading
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: list.length,
-              itemBuilder: (context, i) {
-                final x = list[i];
-                return Card(
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(x.namaProduct,
-                                  style: TextStyle(
-                                      fontFamily: "Quicksand",
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold)),
-                              Text(x.harga,
-                                  style: TextStyle(fontFamily: "Quicksand")),
-                              Text(x.qty, style: TextStyle(fontFamily: "Quicksand")),
-                              Text(x.name, style: TextStyle(fontFamily: "Quicksand")),
-                              Text(x.created_at,
-                                  style: TextStyle(fontFamily: "Quicksand")),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          children: <Widget>[
-                            IconButton(
-                              color: Colors.blue,
-                              onPressed: (){},
-                              icon: Icon(Icons.edit),
-                            ),
-                            IconButton(
-                              color: Colors.red,
-                              onPressed: (){},
-                              icon: Icon(Icons.delete),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-
-      // floating button
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.purple,
         child: Icon(Icons.add),
-        onPressed: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => AddProduct())),
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AddProduct(_readProduct)));
+        },
+      ),
+      // set loading true or false
+      body: RefreshIndicator(
+        onRefresh: _readProduct,
+        key: _refresh,
+        child: loading
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (context, i) {
+                  final x = list[i];
+                  return Card(
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(x.namaProduct,
+                                    style: TextStyle(
+                                        fontFamily: "Quicksand",
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold)),
+                                Text(x.harga,
+                                    style: TextStyle(fontFamily: "Quicksand")),
+                                Text(x.qty,
+                                    style: TextStyle(fontFamily: "Quicksand")),
+                                Text(x.name,
+                                    style: TextStyle(fontFamily: "Quicksand")),
+                                Text(x.created_at,
+                                    style: TextStyle(fontFamily: "Quicksand")),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: <Widget>[
+                              IconButton(
+                                color: Colors.blue,
+                                onPressed: () {},
+                                icon: Icon(Icons.edit),
+                              ),
+                              IconButton(
+                                color: Colors.red,
+                                onPressed: () {},
+                                icon: Icon(Icons.delete),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
       ),
     );
   }

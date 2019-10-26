@@ -7,6 +7,9 @@ import 'package:rez_apps/api/server.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddProduct extends StatefulWidget {
+  final VoidCallback reload;
+  AddProduct(this.reload);
+
   @override
   _AddProductState createState() => _AddProductState();
 }
@@ -42,10 +45,11 @@ class _AddProductState extends State<AddProduct> {
     String message = data['message'];
 
     if (value == 1) {
-      Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT
-      );
+      // Fluttertoast.showToast(
+      //   msg: message,
+      //   toastLength: Toast.LENGTH_SHORT
+      // );
+      widget.reload();
       Navigator.pop(context);
     } else {
       Fluttertoast.showToast(

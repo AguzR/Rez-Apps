@@ -5,6 +5,7 @@ import 'package:rez_apps/api/server.dart';
 import 'package:rez_apps/model/productModel.dart';
 import 'package:rez_apps/views/addProduct.dart';
 import 'package:http/http.dart' as http;
+import 'package:rez_apps/views/editProduct.dart';
 
 class Product extends StatefulWidget {
   @override
@@ -118,7 +119,11 @@ class _ProductState extends State<Product> {
                             children: <Widget>[
                               IconButton(
                                 color: Colors.blue,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => EditProduct(x, _readProduct)
+                                  ));
+                                },
                                 icon: Icon(Icons.edit),
                               ),
                               IconButton(

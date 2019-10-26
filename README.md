@@ -4,6 +4,7 @@
 - CRUD with JSON
 - FlutterToast
 - RefreshIndicator
+- AlertDialog
 
 ## Getting Started
 

@@ -63,6 +63,11 @@ flutter:
     - family: RopaSans
       fonts:
         - asset: fonts/RopaSans-Regular.ttf
+    - family: Quicksand
+      fonts:
+        - asset: fonts/Quicksand-Bold.ttf
+        - asset: fonts/Quicksand-Medium.ttf
+          weight: 700
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

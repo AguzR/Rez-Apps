@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rez_apps/api/server.dart';
 import 'package:rez_apps/views/bottombar.dart';
-import 'package:rez_apps/views/profile.dart';
 import 'package:rez_apps/views/register.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';

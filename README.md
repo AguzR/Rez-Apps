@@ -7,7 +7,7 @@
 - AlertDialog
 
 # Results
-![login](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasillogin.PNG)(https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilregist.PNG)
+![login](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasillogin.PNG), ![regist](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilregist.PNG)
 
 ## Getting Started
 

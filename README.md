@@ -1,4 +1,4 @@
-# rez_apps
+# Rez Apps
 
 - Login and Register with SharedPrefences.
 - Auto Validate for Form Login and Register.

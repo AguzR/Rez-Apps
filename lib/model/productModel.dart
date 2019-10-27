@@ -6,7 +6,8 @@ class ProductModel {
   final String created_at;
   final String idUsers;
   final String name;
+  final String image;
 
-  ProductModel(this.id, this.namaProduct, this.qty, this.harga, this.created_at, this.idUsers, this.name);
+  ProductModel(this.id, this.namaProduct, this.qty, this.harga, this.created_at, this.idUsers, this.name, this.image);
 
 }

@@ -16,7 +16,7 @@ class Product extends StatefulWidget {
 
 class _ProductState extends State<Product> {
   // membuat currency untuk menampilkan harga cth 15,000 ada komanya
-  final _money = NumberFormat("#,##0","en_US");
+  final _money = NumberFormat("#,##0", "en_US");
 
   // membuat list dengan identifier ke productmodel
   final list = new List<ProductModel>();
@@ -25,7 +25,8 @@ class _ProductState extends State<Product> {
   var loading = false;
 
   // membuat global key untuk refresh indicator
-  final GlobalKey<RefreshIndicatorState> _refresh = GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> _refresh =
+      GlobalKey<RefreshIndicatorState>();
 
   // membuat untuk mengambil datanya
   // untuk bisa refresh swipe method harus Future<void>
@@ -55,6 +56,7 @@ class _ProductState extends State<Product> {
           api['created_at'],
           api['idUsers'],
           api['name'],
+          api['image'],
         );
         // untuk menamilkan data panggil list di isi dengan value pModel
         list.add(pModel);
@@ -74,14 +76,14 @@ class _ProductState extends State<Product> {
         FlatButton(
           color: Colors.blue,
           child: Text("No", style: TextStyle(color: Colors.white)),
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
         ),
         FlatButton(
           color: Colors.red,
           child: Text("Yes", style: TextStyle(color: Colors.white)),
-          onPressed: (){
+          onPressed: () {
             _delete(id);
           },
         )
@@ -89,30 +91,22 @@ class _ProductState extends State<Product> {
     );
 
     showDialog(context: context, child: alertDialog);
-
   }
 
   _delete(String id) async {
-    final response = await http.post(BaseUrl.deleteproduct, body: {
-      "idProduct" : id
-    });
+    final response =
+        await http.post(BaseUrl.deleteproduct, body: {"idProduct": id});
     final data = jsonDecode(response.body);
     int value = data['value'];
     String message = data['message'];
     if (value == 1) {
       setState(() {
-        Fluttertoast.showToast(
-          msg: message,
-          toastLength: Toast.LENGTH_SHORT
-        );
+        Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT);
         Navigator.pop(context);
         _readProduct();
       });
     } else {
-      Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT
-      );
+      Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT);
     }
   }
 
@@ -149,6 +143,11 @@ class _ProductState extends State<Product> {
                       padding: EdgeInsets.all(10.0),
                       child: Row(
                         children: <Widget>[
+                          Image.network(
+                              'http://192.168.43.69/rez_apps/upload/' + x.image,
+                              width: 100.0,
+                              height: 100.0,
+                              fit: BoxFit.cover,),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,8 +174,8 @@ class _ProductState extends State<Product> {
                                 color: Colors.blue,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => EditProduct(x, _readProduct)
-                                  ));
+                                      builder: (context) =>
+                                          EditProduct(x, _readProduct)));
                                 },
                                 icon: Icon(Icons.edit),
                               ),

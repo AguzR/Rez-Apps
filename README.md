@@ -3,6 +3,7 @@
 - Login and Register with SharedPrefences.
 - Auto Validate for Form Login and Register.
 - CRUD with JSON.
+- Image Upload with packages Image Picker
 - FlutterToast.
 - RefreshIndicator.
 - AlertDialog.

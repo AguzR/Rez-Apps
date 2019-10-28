@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:rez_apps/api/server.dart';
 import 'package:rez_apps/custom/currency.dart';
+import 'package:rez_apps/custom/datePicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -23,6 +25,9 @@ class _AddProductState extends State<AddProduct> {
   String namaProduct, qty, harga, idUsers;
   final _key = new GlobalKey<FormState>();
   File _imageFile;
+  DateTime tgl = new DateTime.now();
+  final TextStyle valueStyle = TextStyle(fontSize: 16.0);
+  String pilihTanggal, labelText;
 
   Future _chooseGalery() async {
     var image = await ImagePicker.pickImage(
@@ -68,6 +73,7 @@ class _AddProductState extends State<AddProduct> {
       request.fields['qty'] = qty;
       request.fields['harga'] = harga.replaceAll(",", '');
       request.fields['idUsers'] = idUsers;
+      request.fields['releasepro'] = tgl.toString();
 
       request.files.add(new http.MultipartFile(field, stream, length,
           filename: path.basename(_imageFile.path)));
@@ -101,6 +107,20 @@ class _AddProductState extends State<AddProduct> {
     // } else {
     //   Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT);
     // }
+  }
+
+  Future<Null> _selectedDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: tgl,
+        firstDate: DateTime(2012),
+        lastDate: DateTime(2099));
+    if (picked != null && picked != tgl) {
+      setState(() {
+        tgl = picked;
+        pilihTanggal = new DateFormat.yMd().format(tgl);
+      });
+    } else {}
   }
 
   @override
@@ -179,6 +199,14 @@ class _AddProductState extends State<AddProduct> {
               onSaved: (e) => harga = e,
               decoration:
                   InputDecoration(labelText: "Price", hintText: "Price"),
+            ),
+            DateDropdwon(
+              labelText: labelText,
+              valueText: new DateFormat.yMd().format(tgl),
+              valueStyle: valueStyle,
+              onPressed: (){
+                _selectedDate(context);
+              },
             ),
             Padding(padding: EdgeInsets.only(top: 20.0)),
             MaterialButton(

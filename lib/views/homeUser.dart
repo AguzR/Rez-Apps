@@ -76,6 +76,7 @@ class _HomeUsersState extends State<HomeUsers> {
       case LoginStatus.signInUsers:
         return Scaffold(
             appBar: AppBar(
+              title: Text("Rez Store"),
               backgroundColor: Colors.purple,
               actions: <Widget>[
                 IconButton(

@@ -2,9 +2,10 @@
 
 - Login and Register with SharedPrefences.
 - 2 Users : Admin Menu and Users Menu.
+- GridView Product in Home Users
 - Auto Validate for Form Login and Register.
 - CRUD with JSON.
-- Image Upload with packages Image Picker
+- Image Upload with packages ImagePicker
 - DatePicker
 - FlutterToast.
 - RefreshIndicator.
@@ -13,7 +14,7 @@
 - Currency Format for read data, form add product and edit product
 
 # Results
-![login](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasillogin.PNG), ![regist](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilregist.PNG), ![create](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilcreate.PNG), ![read](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilread.PNG), ![update](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilupdate.PNG), ![delete](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasildelete.PNG)
+![login](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasillogin.PNG), ![regist](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilregist.PNG), ![create](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilcreate.PNG), ![read](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilread.PNG), ![update](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilupdate.PNG), ![delete](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasildelete.PNG), ![home](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilhomeuser.PNG)
 
 ## Getting Started
 

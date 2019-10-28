@@ -1,6 +1,7 @@
 # Rez Apps
 
 - Login and Register with SharedPrefences.
+- 2 Users : Admin Menu and Users Menu.
 - Auto Validate for Form Login and Register.
 - CRUD with JSON.
 - Image Upload with packages Image Picker

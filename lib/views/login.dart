@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rez_apps/api/server.dart';
 import 'package:rez_apps/views/bottombar.dart';
+import 'package:rez_apps/views/homeUser.dart';
 import 'package:rez_apps/views/register.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-enum LoginStatus { signIn, notSignIn }
+enum LoginStatus { signIn, notSignIn, singInUsers }
 
 class _LoginPageState extends State<LoginPage> {
   String username, password;
@@ -55,25 +56,35 @@ class _LoginPageState extends State<LoginPage> {
     String id = data['id'];
     String usernameApi = data['username'];
     String nameApi = data['name'];
+    String level = data['level'];
 
     if (value == 1) {
-      setState(() {
-        _loginStatus = LoginStatus.signIn;
-        savePref(value, id, usernameApi, nameApi);
-      });
+      if (level == "1") {
+        setState(() {
+          _loginStatus = LoginStatus.signIn;
+          savePref(value, id, usernameApi, nameApi, level);
+        });
+      } else {
+        setState(() {
+          _loginStatus = LoginStatus.singInUsers;
+          savePref(value, id, usernameApi, nameApi, level);
+        });
+      }
       Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT);
     } else {
       Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT);
     }
   }
 
-  savePref(int value, String id, String username, String name) async {
+  savePref(
+      int value, String id, String username, String name, String level) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setInt("value", value);
       preferences.setString("id", id);
       preferences.setString("username", username);
       preferences.setString("name", name);
+      preferences.setString("level", level);
       preferences.commit();
     });
   }
@@ -81,9 +92,11 @@ class _LoginPageState extends State<LoginPage> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      value = preferences.getInt("value");
+      value = preferences.getString("level");
 
-      _loginStatus = value == 1 ? LoginStatus.signIn : LoginStatus.notSignIn;
+      _loginStatus = value == 1
+          ? LoginStatus.signIn
+          : value == "2" ? LoginStatus.singInUsers : LoginStatus.notSignIn;
     });
   }
 
@@ -226,6 +239,9 @@ class _LoginPageState extends State<LoginPage> {
         break;
       case LoginStatus.signIn:
         return BottomBarz();
+        break;
+      case LoginStatus.singInUsers:
+        return HomeUsers();
         break;
     }
   }

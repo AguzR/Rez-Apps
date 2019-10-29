@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       value = preferences.getString("level");
 
-      _loginStatus = value == 1
+      _loginStatus = value == "1"
           ? LoginStatus.signIn
           : value == "2" ? LoginStatus.singInUsers : LoginStatus.notSignIn;
     });

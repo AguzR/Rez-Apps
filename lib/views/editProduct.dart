@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:rez_apps/api/server.dart';
 import 'package:rez_apps/custom/currency.dart';
+import 'package:rez_apps/custom/datePicker.dart';
 import 'package:rez_apps/model/productModel.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,12 +21,16 @@ class EditProduct extends StatefulWidget {
 
 class _EditProductState extends State<EditProduct> {
   String namaProduct, qty, harga;
-
   final _key = new GlobalKey<FormState>();
-
   TextEditingController txtName, txtQty, txtHarga;
+  String pilihTanggal, labelText;
+  DateTime tgl = new DateTime.now();
+  final TextStyle valueStyle = TextStyle(fontSize: 16.0);
+  String tglDate;
+  var formatTgl = new DateFormat('yyyy-MM-dd');
 
   setup() {
+    tglDate = widget.model.releasepro;
     txtName = TextEditingController(text: widget.model.namaProduct);
     txtQty = TextEditingController(text: widget.model.qty);
     txtHarga = TextEditingController(text: widget.model.harga);
@@ -43,7 +49,8 @@ class _EditProductState extends State<EditProduct> {
       "namaProduct": namaProduct,
       "qty": qty,
       "harga": harga.replaceAll(",", ""),
-      "idProduct": widget.model.id
+      "idProduct": widget.model.id,
+      "releasepro" : tglDate
     });
     final data = jsonDecode(response.body);
     int value = data['value'];
@@ -56,6 +63,20 @@ class _EditProductState extends State<EditProduct> {
       });
     } else {
       Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_SHORT);
+    }
+  }
+
+  Future<void> _selectedDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: tgl,
+        firstDate: DateTime(2012),
+        lastDate: DateTime(2099));
+    if (picked != null || picked != tgl) {
+      setState(() {
+       tgl = picked;
+       tglDate = formatTgl.format(tgl);
+      });
     }
   }
 
@@ -111,11 +132,21 @@ class _EditProductState extends State<EditProduct> {
                   return null;
                 },
                 inputFormatters: [
-                  WhitelistingTextInputFormatter.digitsOnly, CurrencyFormat()
+                  WhitelistingTextInputFormatter.digitsOnly,
+                  CurrencyFormat()
                 ],
                 onSaved: (e) => harga = e,
                 decoration: InputDecoration(
                     labelText: "Harga Product", hintText: "Harga Product"),
+              ),
+              Padding(padding: EdgeInsets.only(top: 20.0)),
+              DateDropdwon(
+                labelText: labelText,
+                valueText: tglDate,
+                valueStyle: valueStyle,
+                onPressed: (){
+                  _selectedDate(context);
+                },
               ),
               Padding(padding: EdgeInsets.only(top: 20.0)),
               MaterialButton(

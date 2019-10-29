@@ -56,6 +56,7 @@ class _HomeUsersState extends State<HomeUsers> {
           api['idUsers'],
           api['name'],
           api['image'],
+          api['releasepro'],
         );
         list.add(pModel);
       });

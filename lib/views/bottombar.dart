@@ -19,7 +19,7 @@ class _BottomBarzState extends State<BottomBarz> with TickerProviderStateMixin {
   signOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      preferences.setInt("value", null);
+      preferences.setString("level", null);
       preferences.commit();
       _loginStatus = LoginStatus.notSignIn;
     });

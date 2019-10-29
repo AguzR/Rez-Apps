@@ -57,6 +57,7 @@ class _ProductState extends State<Product> {
           api['idUsers'],
           api['name'],
           api['image'],
+          api['releasepro'],
         );
         // untuk menamilkan data panggil list di isi dengan value pModel
         list.add(pModel);

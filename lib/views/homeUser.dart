@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:rez_apps/api/server.dart';
 import 'package:rez_apps/model/cartModel.dart';
 import 'package:rez_apps/model/productModel.dart';
+import 'package:rez_apps/views/detailProduct.dart';
 import 'package:rez_apps/views/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -145,7 +146,10 @@ class _HomeUsersState extends State<HomeUsers> {
                                   top: 3.0,
                                   right: 6.0,
                                   child: Text(jumlah,
-                                      style: TextStyle(color: Colors.white, fontSize: 10.0, fontWeight: FontWeight.bold)),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10.0,
+                                          fontWeight: FontWeight.bold)),
                                 )
                               ],
                             ),
@@ -176,12 +180,22 @@ class _HomeUsersState extends State<HomeUsers> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Expanded(
-                            child: Image.network(
-                                'http://192.168.43.69/rez_apps/upload/' +
-                                    x.image,
-                                width: double.infinity,
-                                height: 100.0,
-                                fit: BoxFit.cover),
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => DetailProduct(x)
+                                ));
+                              },
+                              child: Hero(
+                                tag: x.id,
+                                child: Image.network(
+                                    'http://192.168.43.69/rez_apps/upload/' +
+                                        x.image,
+                                    width: double.infinity,
+                                    height: 100.0,
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                           ),
                           Container(
                             height: 30.0,
@@ -214,18 +228,18 @@ class _HomeUsersState extends State<HomeUsers> {
                               )
                             ],
                           ),
-                          RaisedButton(
-                            onPressed: () {
-                              addChart(x.id, x.harga);
-                            },
-                            child: Text("Add to Chart",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Quicksand',
-                                    fontSize: 10.0,
-                                    fontWeight: FontWeight.bold)),
-                            color: Colors.green,
-                          )
+                          // RaisedButton(
+                          //   onPressed: () {
+                          //     addChart(x.id, x.harga);
+                          //   },
+                          //   child: Text("Add to Chart",
+                          //       style: TextStyle(
+                          //           color: Colors.white,
+                          //           fontFamily: 'Quicksand',
+                          //           fontSize: 10.0,
+                          //           fontWeight: FontWeight.bold)),
+                          //   color: Colors.green,
+                          // )
                         ],
                       ),
                     ),

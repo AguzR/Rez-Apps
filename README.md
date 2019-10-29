@@ -5,8 +5,8 @@
 - GridView Product in Home Users
 - Auto Validate for Form Login and Register.
 - CRUD with JSON.
-- Image Upload with packages ImagePicker
-- DatePicker
+- Image Upload and Edit with packages ImagePicker
+- Create and Update Date with DatePicker
 - FlutterToast.
 - RefreshIndicator.
 - AlertDialog.

@@ -15,7 +15,7 @@
 - Currency Format for read data, form add product and edit product.
 
 For RESTApi can be download at the link below
-[RESTApi Rez Apps](https://www90.zippyshare.com/v/s81BPecq/file.html)
+[RESTApi Rez Apps](https://github.com/AguzR/apiforrezapp)
 
 # Results
 ![login](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasillogin.PNG), ![regist](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilregist.PNG), ![create](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilcreate.PNG), ![read](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilread.PNG), ![update](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilupdate.PNG), ![delete](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasildelete.PNG), ![home](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/hasilhomeuser.PNG), ![detp](https://raw.githubusercontent.com/AguzR/Rez-Apps/master/images/detailproduct.PNG)
